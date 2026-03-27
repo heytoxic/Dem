@@ -48,17 +48,17 @@ body {
   min-height: 100vh;
   padding-top: 70px;
 }
-
-/* ── NAVBAR ── */
+  
+/* ── NAVBAR (UPDATED FOR LEFT ALIGNMENT & COMPACT SIZE) ── */
 .navbar {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 70px;
+  height: 65px; /* Thoda chota height fit hone ke liye */
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
   border-bottom: 3px solid var(--saffron);
   display: flex;
   align-items: center;
-  padding: 0 1.25rem;
+  padding: 0 1rem;
   z-index: 1000;
   box-shadow: 0 2px 24px rgba(0,0,0,0.3);
 }
@@ -67,76 +67,78 @@ body {
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 0.75rem;
+  gap: 12px; /* Hamburger aur Logo ke beech ka gap kam kiya */
 }
 
 .hamburger-btn {
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
   color: #fff;
-  width: 38px; height: 38px;
+  width: 36px; height: 36px; /* Perfect square size */
   border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.2s;
+  font-size: 0.95rem;
   flex-shrink: 0;
 }
-.hamburger-btn:hover { background: rgba(255,255,255,0.2); }
 
 .brand-wrap {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  flex: 1;
-  justify-content: center;
+  gap: 10px; /* Icon aur Text ke beech balance gap */
+  flex: none; /* Isse text center mein nahi jayega, left hi rahega */
 }
 
 .brand-icon {
-  width: 40px; height: 40px;
+  width: 42px; height: 42px;
   background: linear-gradient(135deg, var(--saffron), var(--gold));
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   font-size: 1.1rem;
   color: #fff;
-  box-shadow: 0 2px 10px rgba(232,82,26,0.4);
+  box-shadow: 0 0 15px rgba(232,82,26,0.3);
   flex-shrink: 0;
 }
 
-.brand-text { line-height: 1; }
+.brand-text { line-height: 1.1; }
+
 .brand-name {
   font-family: 'Baloo 2', cursive;
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: 0.5px;
+  font-size: 1.2rem; /* Size chota kiya image jaisa fit karne ke liye */
+  font-weight: 700;
+  color: var(--gold); /* "Shiksha" Gold color */
+  letter-spacing: 0.3px;
 }
-.brand-name span { color: var(--gold); }
+
+.brand-name span { color: #fff; } /* "Vibhag" White color */
+
 .brand-sub {
-  font-size: 0.62rem;
-  color: var(--gold-light);
-  letter-spacing: 2px;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.7); /* Thoda faded white */
+  letter-spacing: 1px;
   text-transform: uppercase;
-  opacity: 0.85;
+  font-weight: 500;
 }
 
 .tricolor-bar {
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-left: auto;
+  margin-left: auto; /* Isse tricolor hamesha kone mein rahega */
   flex-shrink: 0;
 }
-.tricolor-bar .tc { width: 4px; height: 28px; border-radius: 2px; }
+
+.tricolor-bar .tc { width: 4px; height: 24px; border-radius: 2px; }
 .tc-saffron { background: #FF9933; }
 .tc-white  { background: #fff; }
 .tc-green  { background: #138808; }
 
+/* Mobile View adjustments */
 @media (max-width: 576px) {
-  .tricolor-bar { display: none; }
-  .brand-wrap { justify-content: center; }
+  .tricolor-bar { display: none; } /* Mobile par tricolor hat jayega taaki logo ko jagah mile */
+  .brand-wrap { justify-content: flex-start; }
 }
-
+  
 /* ── DRAWER ── */
 .drawer-overlay {
   display: none;
