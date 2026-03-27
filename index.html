@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RBSE Result 2025 — Shiksha Vibhag | Rajasthan Board Result</title>
+<title>RBSE Result 2026 — Shiksha Vibhag | Rajasthan Board Result</title>
 <link rel="icon" href="https://rankguruji.com/assets/img/rbse.png" type="image/png">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -893,7 +893,7 @@ footer {
 
   <!-- HERO -->
   <div class="hero-banner">
-    <div class="hero-title">RBSE <span>Board Result</span> 2025</div>
+    <div class="hero-title">RBSE <span>Board Result</span> 2026</div>
     <div class="hero-sub">Rajasthan Board of Secondary Education — School Wise & Individual Result</div>
     <div class="hero-badges">
       <span class="hero-badge"><i class="fas fa-check-circle" style="margin-right:4px;color:#4ade80;"></i>Live Data</span>
@@ -955,16 +955,14 @@ footer {
         </div>
       </div>
 
-      <div class="mt-3 d-flex gap-2 flex-wrap">
-        <button type="submit" class="btn-fetch" style="flex:1;min-width:160px;">
-          <i class="fas fa-school"></i> School Wise Result
-        </button>
-        <button type="button" class="btn-fetch btn-student" id="fetchStudentBtn" style="flex:1;min-width:160px;">
-          <i class="fas fa-user-graduate"></i> Student Result
+      <div class="mt-3">
+        <button type="button" class="btn-fetch btn-student" id="fetchStudentBtn" style="width: 100%;">
+          <i class="fas fa-user-graduate"></i> Check Result
         </button>
       </div>
     </form>
   </div>
+  
 
   <!-- PREV RESULTS -->
   <div id="prevSection" style="display:none;">
@@ -1103,7 +1101,7 @@ footer {
       <span class="tc-i" style="background:#fff;"></span>
       <span class="tc-i" style="background:#138808;"></span>
     </span>
-    &copy; 2025 <strong style="color:rgba(255,255,255,0.7)">Shiksha Vibhag</strong> &nbsp;|&nbsp;
+    &copy; 2026 <strong style="color:rgba(255,255,255,0.7)">Shiksha Vibhag</strong> &nbsp;|&nbsp;
     Rajasthan Board Result Portal &nbsp;|&nbsp;
     Data Source: RBSE OFFICIAL API
   </div>
@@ -1143,7 +1141,7 @@ let currentStudentData = null;
 // ── INIT ──
 (function init() {
   const ys = document.getElementById('yearSel');
-  ['2026','2025','2024'].forEach(y => {
+  ['2026'].forEach(y => {
     const o = document.createElement('option'); o.value=y; o.textContent=y;
     ys.appendChild(o);
   });
@@ -1736,10 +1734,10 @@ function showMarksheet(d) {
     </div>
     <div class="ms-body">
       <div class="ms-info-grid">
-        <span class="ms-lbl">Naam / Name</span><span class="ms-val">${name}</span>
+        <span class="ms-lbl">Name</span><span class="ms-val">${name}</span>
         <span class="ms-lbl">Roll No.</span><span class="ms-val">${rollNo}</span>
-        <span class="ms-lbl">Pita / Father</span><span class="ms-val">${fname}</span>
-        ${mname?`<span class="ms-lbl">Mata / Mother</span><span class="ms-val">${mname}</span>`:'<span></span><span></span>'}
+        <span class="ms-lbl">Father Name</span><span class="ms-val">${fname}</span>
+        ${mname?`<span class="ms-lbl">Mother Name</span><span class="ms-val">${mname}</span>`:'<span></span><span></span>'}
       </div>
       <table class="ms-table">
         <thead><tr>
