@@ -51,6 +51,10 @@ def fetch_result():
     else:
         return jsonify({"error": "Result fetch failed"}), 404
 
+# Baaki saara code wahi rahega...
+
+app_export = app # Ye Vercel ke liye hai
+
 if __name__ == '__main__':
     app.run()
-    
+
