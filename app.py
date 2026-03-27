@@ -8,7 +8,6 @@ CORS(app)
 API_URL = "https://rbse.rankguruji.com/api/result"
 
 def get_fast_result(roll_no, year, std):
-    # Class mapping logic for 12th
     std_lower = str(std).lower()
     if "12" in std_lower:
         if "science" in std_lower or "sci" in std_lower:
@@ -18,9 +17,9 @@ def get_fast_result(roll_no, year, std):
         elif "arts" in std_lower:
             clean_std = "12a"
         else:
-            clean_std = "12" # Default 12th
+            clean_std = "12"
     else:
-        clean_std = "10" # Default 10th
+        clean_std = "10"
 
     payload = {
         "board": "rj",
@@ -30,7 +29,7 @@ def get_fast_result(roll_no, year, std):
     }
     
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "User-Agent": "Mozilla/5.0",
         "Content-Type": "application/json",
         "Origin": "https://rankguruji.com",
         "Referer": "https://rankguruji.com/"
@@ -61,5 +60,9 @@ def fetch_result():
     else:
         return jsonify({"error": "Result not found"}), 404
 
+
+app_export = app 
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run()
+    
