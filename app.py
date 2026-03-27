@@ -45,5 +45,7 @@ def fetch_result():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-app_export = app
+app_export = app 
 
+if __name__ == '__main__':
+    app.run()
