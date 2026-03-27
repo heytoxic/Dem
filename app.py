@@ -9,10 +9,12 @@ CORS(app)
 API_URL = "https://rbse.rankguruji.com/api/result"
 
 def get_fast_result(roll_no, year, std):
-    clean_std = "".join(filter(str.isdigit, str(std)))
+    # '10th' ya '12th' ko sirf number mein badalne ke liye
+    clean_std = "".join(filter(str.isdigit, str(std))) if std else "10"
+    
     payload = {
         "board": "rj",
-        "year": str(year),
+        "year": str(year) if year else "2026",
         "std": clean_std,
         "roll_no": int(roll_no)
     }
@@ -27,7 +29,7 @@ def get_fast_result(roll_no, year, std):
     }
 
     try:
-        response = requests.post(API_URL, json=payload, headers=headers, timeout=5)
+        response = requests.post(API_URL, json=payload, headers=headers, timeout=8)
         if response.status_code == 200:
             return response.json()
         return None
@@ -41,8 +43,9 @@ def fetch_result():
         return jsonify({"error": "Roll number missing"}), 400
 
     roll_no = data.get('roll_no')
-    year = data.get('year', '2026')
-    std = data.get('class', '10')
+    # Agar frontend se value nahi aayi, toh ye default values lega
+    year = data.get('year') or data.get('YEAR') or "2026"
+    std = data.get('class') or data.get('CLASS') or "10"
 
     result = get_fast_result(roll_no, year, std)
     
