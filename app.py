@@ -5,57 +5,60 @@ import json
 import time
 
 app = Flask(__name__)
-CORS(app) # Frontend block hone se bachane ke liye
+CORS(app)
 
-# Rank Guru Ji ke official API endpoints
+# Rank Guru Ji ke Actual Endpoints
 RANK_GURU_RESULT_API = "https://rbse.rankguruji.com/api/result"
 RANK_GURU_STREAM_API = "https://rbse.rankguruji.com/api/stream"
 
-def fetch_from_rank_guru(roll_no, board, year, std):
-    """Rank Guru Ji ke API se single student ka data laane ke liye"""
-    payload = {
-        "board": board,
-        "year": year,
-        "std": std,
-        "roll_no": int(roll_no)
-    }
+def fetch_data(payload, url):
     headers = {
         'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
     }
-    
     try:
-        response = requests.post(RANK_GURU_RESULT_API, json=payload, headers=headers, timeout=10)
-        if response.status_status == 200:
+        # Unka API JSON format mangta hai
+        response = requests.post(url, json=payload, headers=headers, timeout=15)
+        if response.status_code == 200:
             return response.json()
-        return {"error": "API se data nahi mila"}
+        return None
     except Exception as e:
-        return {"error": str(e)}
+        print(f"Error: {e}")
+        return None
 
-# 1. Single Result Endpoint
 @app.route('/api/result', methods=['POST'])
 def get_result():
     data = request.json
-    res = fetch_from_rank_guru(
-        data.get('roll_no'), 
-        data.get('board', 'rj'), 
-        data.get('year', '2026'), 
-        data.get('class', '10')
-    )
-    return jsonify(res)
+    # Rank Guru Ji ke API parameters match kar rahe hain
+    payload = {
+        "board": data.get('board', 'rj'),
+        "year": data.get('year', '2026'),
+        "std": data.get('class', '10'),
+        "roll_no": int(data.get('roll_no'))
+    }
+    
+    result = fetch_data(payload, RANK_GURU_RESULT_API)
+    if result:
+        return jsonify(result)
+    else:
+        return jsonify({"error": "Result nahi mila"}), 404
 
-# 2. School Wise Stream Endpoint
 @app.route('/api/stream', methods=['POST'])
 def stream_results():
     data = request.json
-    # Hum Rank Guru Ji ke stream API ko direct forward karenge
+    payload = {
+        "board": data.get('board', 'rj'),
+        "year": data.get('year', '2026'),
+        "std": data.get('class', '10'),
+        "roll_no": int(data.get('roll_no'))
+    }
+
     def generate():
         try:
-            # Rank Guru Ji ke API ko hit karte hain
-            with requests.post(RANK_GURU_STREAM_API, json=data, stream=True, timeout=30) as r:
+            # Stream mode mein data forward karna
+            with requests.post(RANK_GURU_STREAM_API, json=payload, stream=True, timeout=60) as r:
                 for line in r.iter_lines():
                     if line:
-                        # Har ek bache ka data live yield karega
                         yield line.decode('utf-8') + "\n"
         except Exception as e:
             yield json.dumps({"error": str(e)}) + "\n"
@@ -63,6 +66,4 @@ def stream_results():
     return Response(generate(), mimetype='application/json')
 
 if __name__ == '__main__':
-    # 0.0.0.0 par run karein taaki internet par access ho sake
     app.run(host='0.0.0.0', port=5000)
-    
