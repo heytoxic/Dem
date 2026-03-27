@@ -1140,9 +1140,9 @@ footer {
 </div>
 
 <script>
-// Inke aage corsproxy laga diya hai
-const API_STREAM = 'https://corsproxy.io/?https://rbse.rankguruji.com/api/stream';
-const API_RESULT = 'https://corsproxy.io/?https://rbse.rankguruji.com/api/result';
+const MY_VPS_IP = 'http://103.25.175.203:5000'; 
+const API_STREAM = `${MY_VPS_IP}/api/stream`;
+const API_RESULT = `${MY_VPS_IP}/api/result`;
 const CACHE_PFX   = 'sv_res_';
 const PREV_KEY    = 'sv_prev_searches';
 const LAST_ROLL   = 'sv_last_roll';
